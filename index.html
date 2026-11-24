@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday, My Everything!</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-color: #1a0b16;
+        --card-bg: #2d132c;
+        --accent-color: #ff4d79;
+        --text-main: #ffffff;
+        --text-muted: #e0b3cd;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        background: (135deg, #1a0b16, #2d1b24, #1a0b16);
+        background-attachment: fixed;
+        color: white;
+        font-family: "Poppins", sans-serif;
+
+        /* TAMBAHKAN INI DI SINI */
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard */
+        -webkit-tap-highlight-color: transparent; /* Hilangkan efek abu-abu saat di-tap */
+      }
+
+      /* Animasi latar belakang bintang */
+      body {
+        background: radial-gradient(circle at center, #2d1b24, #1a0b16);
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+          radial-gradient(
+            white,
+            rgba(255, 255, 255, 0.2) 2px,
+            transparent 40px
+          ),
+          radial-gradient(
+            white,
+            rgba(255, 255, 255, 0.15) 1px,
+            transparent 30px
+          );
+        background-size:
+          550px 550px,
+          350px 350px;
+        background-position:
+          0 0,
+          40px 60px;
+        opacity: 0.5;
+        animation: moveStars 20s linear infinite;
+        pointer-events: none;
+        z-index: -1; /* Pastikan di belakang konten */
+      }
+
+      @keyframes moveStars {
+        from {
+          background-position:
+            0 0,
+            40px 60px;
+        }
+        to {
+          background-position:
+            550px 550px,
+            390px 410px;
+        }
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* Efek tekstur samar (noise) agar tidak terlalu polos */
+        background: url("https://www.transparenttextures.com/patterns/stardust.png");
+        pointer-events: none;
+        opacity: 0.3;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        overflow-x: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      /* --- SCREEN 1: KOTAK KADO --- */
+      #gift-screen {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+        transition: opacity 0.5s ease;
+      }
+
+      .gift-box {
+        font-size: 80px;
+        animation: bounce 1.5s infinite alternate;
+      }
+
+      @keyframes bounce {
+        from {
+          transform: translateY(0) scale(1);
+        }
+        to {
+          transform: translateY(-20px) scale(1.05);
+        }
+      }
+
+      .gift-hint {
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        letter-spacing: 2px;
+        animation: pulse 1.5s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* --- SCREEN 2: UTAMA (DIPAKSA SEMBUNYI DULU) --- */
+      #main-content {
+        position: relative;
+        z-index: 1;
+        display: none;
+        width: 100%;
+        max-width: 450px; /* Biar pas seukuran layar HP */
+        padding: 25px;
+        opacity: 0;
+        transition: opacity 1s ease-in;
+      }
+
+      /* Header / Serenade */
+      header {
+        text-align: center;
+        margin-bottom: 40px;
+        margin-top: 20px;
+      }
+
+      .subtitle {
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+
+      h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2.2rem;
+        line-height: 1.3;
+        margin-bottom: 15px;
+      }
+
+      .opening-text {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        font-weight: 300;
+      }
+
+      /* Card Surat */
+      .letter-card {
+        background: rgba(255, 255, 255, 0.05) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-bottom: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .letter-card h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+
+      .letter-card p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: #f0e6ef;
+        margin-bottom: 15px;
+        font-weight: 300;
+      }
+
+      .signature {
+        text-align: right;
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        color: var(--accent-color);
+        margin-top: 20px;
+      }
+
+      /* Grid Komponen ("What I Celebrate About You") */
+      .grid-title {
+        text-align: center;
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 40px;
+      }
+
+      .animate-lift {
+        transition:
+          transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          box-shadow 0.4s ease;
+      }
+
+      .grid-item {
+        background: rgba(45, 19, 44, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 15px;
+        text-align: center;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          box-shadow 0.4s ease;
+      }
+
+      .grid-item:hover {
+        transform: translateY(-15px) scale(1.05); /* Mengangkat ke atas dan sedikit membesar */
+        box-shadow: 0 15px 30px rgba(255, 77, 121, 0.3); /* Bayangan pink */
+        border-color: var(--accent-color); /* Border jadi warna pink */
+        cursor: pointer;
+      }
+
+      .grid-icon {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+      }
+
+      .grid-item h3 {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+
+      .grid-item p {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        line-height: 1.4;
+      }
+
+      /* Bagian Foto Gelap Estetik */
+      .photo-section h2 {
+        text-align: center;
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 40px;
+        padding: 0 10px;
+      }
+
+      .photo-box {
+        background: rgba(0, 0, 0, 0.2); /* Hitam transparan */
+        backdrop-filter: blur(5px);
+        position: relative;
+        border-radius: 25px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        filter: none;
+        transition:
+          transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          box-shadow 0.4s ease,
+          opacity 0.4s ease;
+        min-height: 170px;
+        width: 95%;
+
+        /* Efek Blur & Hitam Putih */
+        filter: grayscale(100%) blur(5px);
+        transition: filter 0.5s ease-out;
+      }
+
+      .photo-box.is-active,
+      .grid-item.is-active {
+        transform: translateY(-15px) scale(1.05); /* Melompat ke atas */
+        box-shadow: 0 20px 40px rgba(255, 77, 121, 0.4); /* Bayangan pink */
+        border-color: var(--accent-color);
+        opacity: 1;
+      }
+
+      .photo-box.fade-in-visible {
+        filter: grayscale(0%) blur(0px); /* Kembali normal */
+      }
+
+      .photo-box:hover {
+        filter: grayscale(0%) blur(0px);
+        transform: scale(1.05); /* Zoom in 5% */
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Muncul bayangan agar terlihat seperti melayang */
+        z-index: 2; /* Memastikan foto yang disentuh berada di atas foto lain */
+      }
+
+      .photo-box img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+        -webkit-touch-callout: none;
+        pointer-events: none;
+      }
+
+      .photo-box:hover img {
+        transform: scale(1.1);
+      }
+
+      .photo-box.active-touch {
+        transform: translateY(-15px) scale(1.05); /* Melompat */
+        box-shadow: 0 20px 40px rgba(255, 77, 121, 0.4); /* Bayangan lebih jelas */
+        border-color: var(--accent-color);
+        opacity: 1; /* Pastikan tetap jelas */
+      }
+
+      .photo-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 15px 0;
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: 700;
+        font-family: "Playfair Display", serif;
+        color: #ffffff;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.8),
+          transparent
+        ); /* Background gelap transparan */
+        z-index: 10; /* Memastikan teks selalu di atas gambar */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 20px 0;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      /* Efek Kelopak Bunga Berjatuhan */
+      .petal {
+        position: absolute;
+        background: var(--accent-color);
+        border-radius: 150% 0 150% 150%;
+        opacity: 0.3;
+        pointer-events: none;
+        animation: fade-fall linear infinite;
+      }
+
+      @keyframes fade-fall {
+        0% {
+          transform: translateY(-10px) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.5;
+        }
+        90% {
+          opacity: 0.5;
+        }
+        100% {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+      /* --- ANIMASI FADE-IN SCROLL --- */
+      .fade-in-element {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 3s ease-in;
+      }
+
+      /* Class ini yang akan ditambahkan oleh JavaScript otomatis */
+      .fade-in-element.fade-in-visible {
+        opacity: 1;
+      }
+
+      /* Container Spotify Style */
+      .popup-music {
+        position: fixed;
+        top: 20px; /* Diubah dari bottom ke top */
+        right: 20px;
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-radius: 50px;
+        padding: 5px 15px 5px 5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        z-index: 999;
+
+        /* Animasi muncul dari atas (diganti translateY ke arah negatif) */
+        transform: translateY(-100px);
+        transition: transform 0.5s ease;
+      }
+
+      .popup-music.active {
+        transform: translateY(0);
+      }
+
+      .popup-music img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+
+      .vinyl-container {
+        width: 35px; /* Ukuran wadah */
+        height: 35px;
+        position: relative;
+        border-radius: 50%;
+        overflow: hidden;
+        flex-shrink: 0;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .vinyl-disc {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        animation: spin 3s linear infinite;
+        animation-play-state: paused;
+      }
+
+      .vinyl-disc.playing {
+        animation-play-state: running;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .vinyl-disc {
+        /* Pastikan ada properti ini */
+        display: block;
+        animation: spin 3s linear infinite;
+        animation-play-state: paused; /* Berhenti saat tidak ada class .playing */
+      }
+
+      .vinyl-disc.playing {
+        animation-play-state: running; /* Berputar saat class .playing ada */
+      }
+
+      .info {
+        overflow: hidden;
+        max-width: 100px; /* Batasi lebar teks agar tidak terlalu panjang */
+      }
+
+      .info h4 {
+        font-size: 0.7rem;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+      }
+
+      .info p {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="backsound" loop>
+      <source src="lagu.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="gift-screen" onclick="bukaKado()">
+      <div class="gift-box">🎁</div>
+      <p class="gift-hint">✨ Tap to open your gift ✨</p>
+    </div>
+
+    <div id="main-content">
+      <header>
+        <p class="subtitle">a birthday serenade in bloom</p>
+        <h1>Happy Birthday,<br />My Everything</h1>
+        <p class="opening-text">
+          Hari ini, seluruh semesta ikut merayakan hari di mana kamu dilahirkan
+          ke dunia ini. ✨
+        </p>
+      </header>
+
+      <section class="letter-card fade-in-element">
+        <h2>From the bottom of my heart</h2>
+        <p>
+          Selamat ulang tahun, Sayang. Menghabiskan waktu di sampingmu adalah
+          anugerah terbesar yang gak pernah bosan aku syukuri setiap harinya.
+        </p>
+        <p>
+          Terima kasih sudah menjadi alasan aku tersenyum, terima kasih untuk
+          sabarmu, dan terima kasih telah menjadi diri kamu sendiri yang luar
+          biasa.
+        </p>
+        <p>
+          Semoga di umur yang baru ini, kebahagiaan selalu memelukmu, langkahmu
+          dipermudah, dan impianmu satu per satu jadi kenyataan. Aku akan selalu
+          ada di sini buat dukung kamu.
+        </p>
+        <p class="signature">~ Yours, always & forever ❤️</p>
+      </section>
+
+      <h2 class="grid-title">What I Celebrate About You</h2>
+      <section class="grid-container fade-in-element">
+        <div class="grid-item">
+          <div class="grid-icon">😊</div>
+          <h3>Your Smile</h3>
+          <p>Alasan terbaik yang bikin hari-hariku jadi jauh lebih cerah.</p>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon">✨</div>
+          <h3>Your Soul</h3>
+          <p>Hati kamu yang tulus dan berharga lebih dari apapun.</p>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon">💖</div>
+          <h3>Your Kindness</h3>
+          <p>Cara kamu peduli pada sekitar selalu bikin aku kagum.</p>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon">💪</div>
+          <h3>Your Strength</h3>
+          <p>Kamu jauh lebih kuat dari yang pernah kamu bayangkan.</p>
+        </div>
+      </section>
+
+      <section class="photo-section">
+        <h2>Your Beautiful Pictures</h2>
+        <div class="photo-grid">
+          <div class="photo-box fade-in-element">
+            <img src="foto1.jpg" alt="Foto 1" />
+            <div class="photo-caption">You</div>
+          </div>
+          <div class="photo-box fade-in-element">
+            <img src="foto2.jpg" alt="Foto 2" />
+            <div class="photo-caption">are</div>
+          </div>
+          <div class="photo-box fade-in-element">
+            <img src="foto3.jpg" alt="Foto 3" />
+            <div class="photo-caption">so</div>
+          </div>
+          <div class="photo-box fade-in-element">
+            <img src="foto4.jpg" alt="Foto 4" />
+            <div class="photo-caption">beautiful</div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>oawkoawkoakoaw</p>
+      </footer>
+    </div>
+
+    <div id="music-popup" class="popup-music">
+      <!-- Container ini yang akan memberi efek piringan hitam -->
+      <div class="vinyl-container">
+        <img src="cover-lagu.jpg" class="vinyl-disc" id="cover-img" />
+      </div>
+
+      <div class="info">
+        <h4 id="song-title">Semua Aku Dirayakan</h4>
+        <p>Nadin Amizah</p>
+      </div>
+    </div>
+
+    <script>
+      function bukaKado() {
+        const audio = document.getElementById("backsound");
+        const vinyl = document.getElementById("cover-img");
+        const giftScreen = document.getElementById("gift-screen");
+        const mainContent = document.getElementById("main-content");
+        const musicPopup = document.getElementById("music-popup");
+
+        // 1. Play musik
+        audio.volume = 0;
+        audio.play().then(() => {
+          let volume = 0;
+          const fadeAudio = setInterval(() => {
+            if (volume < 0.8) {
+              volume += 0.02;
+              audio.volume = volume;
+            } else {
+              clearInterval(fadeAudio);
+            }
+          }, 200);
+        });
+
+        if (vinyl) vinyl.classList.add("playing");
+
+        // 2. Transisi Layar
+        giftScreen.style.opacity = "0";
+        setTimeout(() => {
+          giftScreen.style.display = "none";
+          mainContent.style.display = "block";
+          document.body.style.overflowY = "auto";
+          setTimeout(() => {
+            mainContent.style.opacity = "1";
+            if (musicPopup) musicPopup.classList.add("active");
+            aktifkanScroll();
+          }, 50);
+          mulaiEfekBunga();
+        }, 500);
+
+        // 3. Efek Interaksi (Sinkronkan ke .is-active)
+        const interactiveElements = document.querySelectorAll(
+          ".grid-item, .photo-box",
+        );
+        interactiveElements.forEach((el) => {
+          el.addEventListener("click", () => {
+            if (el.classList.contains("is-active")) return;
+            el.classList.add("is-active");
+            setTimeout(() => el.classList.remove("is-active"), 600);
+          });
+        });
+      }
+
+      // Fungsi membuat kelopak bunga jatuh
+      function mulaiEfekBunga() {
+        setInterval(() => {
+          const petal = document.createElement("div");
+          petal.classList.add("petal");
+          petal.style.left = Math.random() * 100 + "vw";
+          const size = Math.random() * 8 + 6;
+          petal.style.width = size + "px";
+          petal.style.height = size + "px";
+          petal.style.animationDuration = Math.random() * 3 + 3 + "s";
+          document.body.appendChild(petal);
+          setTimeout(() => petal.remove(), 6000);
+        }, 300);
+      }
+
+      // Fungsi untuk fade-in elemen saat di-scroll
+      function aktifkanScroll() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("fade-in-visible");
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        document.querySelectorAll(".fade-in-element").forEach((el) => {
+          observer.observe(el);
+        });
+      }
+    </script>
+  </body>
+</html>
